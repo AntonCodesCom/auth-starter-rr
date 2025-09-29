@@ -7,7 +7,9 @@
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "e2e:ci": "playwright test",
+    "e2e": "playwright test --ui"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -23,6 +25,7 @@
     "react-router": "^7.9.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.1",
     "@react-router/dev": "^7.9.2",
     "@tailwindcss/vite": "^4.1.13",
     "@types/node": "^22",
