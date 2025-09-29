@@ -31,7 +31,7 @@ export default function makeAuthSessionUtils() {
         secrets: [sessionCookieSecret],
         // secure: isProd || !allowSessionCookieWithoutHttps,
         secure: true,
-        maxAge: 60 * 60 * 24 * 7, // 7 days
+        maxAge: 60 * 60 * 12, // 12 hours
       },
     });
   return {
