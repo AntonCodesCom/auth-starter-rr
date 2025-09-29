@@ -4,6 +4,7 @@ import e2eLogInProgrammatically, {
 } from './utils/logInProgrammatically';
 import { envE2E } from '~/env';
 import { faker } from '@faker-js/faker';
+import makeAuthSessionUtils from '~/sessions/auth';
 
 // env e2e
 const { e2ePassword, e2eUsername } = envE2E();
@@ -38,11 +39,18 @@ test('no access token', async ({ page }) => {
  * e2e
  */
 test('invalid access token', async ({ page, context }) => {
+  // simulate an invalid token
   const invalidAccessToken = `invalid-access-token-${faker.string.alphanumeric(5)}`;
   await e2eSetAccessTokenIntoSessionCookie({
     context,
     accessToken: invalidAccessToken,
   });
+  // start
   await page.goto('/', { waitUntil });
   await expect(page).toHaveURL('/login');
+  // assert session cookie absence
+  const cookies = await context.cookies();
+  const cookieNames = cookies.map((x) => x.name);
+  const { authSessionName } = makeAuthSessionUtils();
+  expect(cookieNames).not.toContain(authSessionName);
 });

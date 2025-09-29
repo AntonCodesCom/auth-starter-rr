@@ -1,6 +1,8 @@
 import { redirect } from 'react-router';
 import type { Route } from './+types/_m._index';
-import { getAccessTokenFromRequest } from '~/sessions/auth';
+import makeAuthSessionUtils, {
+  getAccessTokenFromRequest,
+} from '~/sessions/auth';
 import authFetch from '~/Auth/utils/fetch';
 import { UnauthorizedException } from '~/Auth/exceptions';
 
@@ -18,8 +20,15 @@ export async function loader({ request }: Route.LoaderArgs) {
     return redirect('/restricted');
   } catch (err) {
     if (err instanceof UnauthorizedException) {
-      return redirect('/login'); // TODO: clear auth cookie
+      const { getAuthSession, destroyAuthSession } = makeAuthSessionUtils();
+      const cookieHeader = request.headers.get('Cookie');
+      const session = await getAuthSession(cookieHeader);
+      return redirect('/login', {
+        headers: {
+          'Set-Cookie': await destroyAuthSession(session),
+        },
+      });
     }
-    throw err;
+    throw err; // TODO: e2e
   }
 }
