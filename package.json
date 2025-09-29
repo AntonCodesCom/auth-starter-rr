@@ -43,6 +43,6 @@
     "singleQuote": true
   },
   "lint-staged": {
-    "*.{js,css,md}": "prettier --write"
+    "*.{js,md,ts,tsx}": "prettier --write"
   }
 }
