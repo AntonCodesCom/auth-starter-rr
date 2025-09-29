@@ -1,6 +1,9 @@
 import test, { expect } from '@playwright/test';
-import e2eLogInProgrammatically from './utils/logInProgrammatically';
+import e2eLogInProgrammatically, {
+  e2eSetAccessTokenIntoSessionCookie,
+} from './utils/logInProgrammatically';
 import { envE2E } from '~/env';
+import { faker } from '@faker-js/faker';
 
 // env e2e
 const { e2ePassword, e2eUsername } = envE2E();
@@ -34,4 +37,12 @@ test('no access token', async ({ page }) => {
 /**
  * e2e
  */
-test.skip('invalid access token', async ({ page }) => {});
+test('invalid access token', async ({ page, context }) => {
+  const invalidAccessToken = `invalid-access-token-${faker.string.alphanumeric(5)}`;
+  await e2eSetAccessTokenIntoSessionCookie({
+    context,
+    accessToken: invalidAccessToken,
+  });
+  await page.goto('/', { waitUntil });
+  await expect(page).toHaveURL('/login');
+});
