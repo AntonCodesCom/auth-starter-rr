@@ -1,4 +1,7 @@
-import test from "@playwright/test";
+import test, { expect } from "@playwright/test";
+
+// local config
+const waitUntil = 'domcontentloaded'
 
 /**
  * e2e
@@ -8,7 +11,10 @@ test.skip('authenticated', async ({ page }) => {})
 /**
  * e2e
  */
-test.skip('no access token', async ({ page }) => {})
+test('no access token', async ({ page }) => {
+  await page.goto('/', {waitUntil})
+  await expect(page).toHaveURL('/login')
+})
 
 /**
  * e2e
