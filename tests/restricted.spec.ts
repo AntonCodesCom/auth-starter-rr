@@ -14,3 +14,13 @@ test('authenticated', async ({page}) => {
   const heading = page.getByText('Restricted Route', { exact })
   await expect(heading).toBeVisible()
 });
+
+/**
+ * e2e
+ */
+test.skip('no access token', async ({ page }) => {})
+
+/**
+ * e2e
+ */
+test.skip('invalid access token', async ({ page }) => {})
