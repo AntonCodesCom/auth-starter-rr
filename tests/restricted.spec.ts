@@ -43,6 +43,6 @@ test('invalid access token', async ({ page, context }) => {
   await page.goto('/restricted', { waitUntil });
   const restrictedHeading = page.getByText('Restricted Route', { exact });
   await expect(restrictedHeading).not.toBeVisible();
-  // const unauthorizedHeading = page.getByText('401 Unauthorized', { exact });
-  // await expect(restrictedHeading).not.toBeVisible();
+  const unauthorizedHeading = page.getByText('401 Unauthorized', { exact });
+  await expect(unauthorizedHeading).toBeVisible();
 });
