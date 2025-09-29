@@ -1,6 +1,9 @@
 import test, { expect } from '@playwright/test';
-import e2eLogInProgrammatically from './utils/logInProgrammatically';
+import e2eLogInProgrammatically, {
+  e2eSetAccessTokenIntoSessionCookie,
+} from './utils/logInProgrammatically';
 import { envE2E } from '~/env';
+import { faker } from '@faker-js/faker';
 
 // env e2e
 const { e2ePassword, e2eUsername } = envE2E();
@@ -23,14 +26,23 @@ test('authenticated', async ({ page, context }) => {
   await page.goto('/restricted', { waitUntil });
   const heading = page.getByText('Restricted Route', { exact });
   await expect(heading).toBeVisible();
+  // server response assertions would typically go here, skipping for this demo route
 });
 
 /**
  * e2e
  */
-test.skip('no access token', async ({ page }) => {});
-
-/**
- * e2e
- */
-test.skip('invalid access token', async ({ page }) => {});
+test('invalid access token', async ({ page, context }) => {
+  // simulate an invalid token
+  const invalidAccessToken = `invalid-access-token-${faker.string.alphanumeric(5)}`;
+  await e2eSetAccessTokenIntoSessionCookie({
+    context,
+    accessToken: invalidAccessToken,
+  });
+  // start
+  await page.goto('/restricted', { waitUntil });
+  const restrictedHeading = page.getByText('Restricted Route', { exact });
+  await expect(restrictedHeading).not.toBeVisible();
+  // const unauthorizedHeading = page.getByText('401 Unauthorized', { exact });
+  // await expect(restrictedHeading).not.toBeVisible();
+});

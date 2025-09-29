@@ -1,4 +1,17 @@
-import { Container,  Paper,  Typography } from "@mui/material";
+import { Container, Paper, Typography } from '@mui/material';
+import type { Route } from './+types/_m.restricted';
+import { getAccessTokenFromRequest } from '~/sessions/auth';
+import authFetch from '~/Auth/utils/fetch';
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const accessToken = (await getAccessTokenFromRequest(request))!; // force assuming presence
+  const data = await authFetch<{ message: string }>({
+    accessToken,
+    method: 'get',
+    pathname: '/restricted',
+  });
+  return { message: data.message };
+}
 
 export default function RouteRestricted() {
   return (
@@ -7,11 +20,15 @@ export default function RouteRestricted() {
         Restricted Route
       </Typography>
       <Typography component="p">
-        Only authenticated users should be able to see this page. Response from a restricted server endpoint:
+        Only authenticated users should be able to see this page. Response from
+        a restricted server endpoint:
       </Typography>
       <Paper sx={{ p: 2, mt: 2, bgcolor: 'grey.900' }}>
-        <Typography component="pre" sx={{ color: 'common.white', fontFamily: 'monospace' }}>
-{`// Example authentication code
+        <Typography
+          component="pre"
+          sx={{ color: 'common.white', fontFamily: 'monospace' }}
+        >
+          {`// Example authentication code
 const login = async (credentials) => {
   const response = await fetch('/api/auth/login', {
     method: 'POST',
@@ -23,5 +40,5 @@ const login = async (credentials) => {
         </Typography>
       </Paper>
     </Container>
-  )
+  );
 }
