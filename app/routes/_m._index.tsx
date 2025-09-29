@@ -1,13 +1,4 @@
-import type { Route } from "./+types/_m._index";
-import { AppBar, Box, Button, Container, Link, Paper, Toolbar, Typography } from "@mui/material";
-import { GitHub, LinkedIn } from "@mui/icons-material";
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "Auth Starter" },
-    { name: "description", content: "Auth Starter" },
-  ];
-}
+import { Container, Paper, Typography } from "@mui/material";
 
 export default function RouteIndex() {
   return (
