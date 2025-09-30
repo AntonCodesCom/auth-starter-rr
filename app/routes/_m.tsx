@@ -3,14 +3,13 @@ import {
   Box,
   Button,
   Container,
-  Link,
   Toolbar,
   Typography,
 } from '@mui/material';
-import { GitHub, LinkedIn } from '@mui/icons-material';
-import { Outlet } from 'react-router';
+import { Link, Outlet } from 'react-router';
 import type { Route } from './+types/_m';
 import { UnauthorizedException } from '~/Auth/exceptions';
+import CoreSocialLinks from '~/Core/components/SocialLinks';
 
 export default function RouteLayoutMain() {
   return (
@@ -27,7 +26,9 @@ export default function RouteLayoutMain() {
               Auth Starter
             </Typography>
           </Box>
-          <Button color="inherit">Logout</Button>
+          <Button component={Link} to="/logout" color="inherit">
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -37,34 +38,21 @@ export default function RouteLayoutMain() {
 
       <Box
         component="footer"
+        textAlign="center"
         sx={{ py: 3, px: 2, mt: 'auto', bgcolor: 'grey.100' }}
       >
         <Container maxWidth="sm">
-          <Typography variant="body2" color="text.secondary" align="center">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            align="center"
+            mb={1}
+          >
             {'Copyright © '}
             {new Date().getFullYear()}
-            {' Auth Starter. All rights reserved.'}
+            {' Anton Bahurinsky'}
           </Typography>
-          <Box
-            sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 1 }}
-          >
-            <Link
-              href="https://github.com/AntonCodesCom"
-              color="inherit"
-              sx={{ display: 'flex', alignItems: 'center' }}
-            >
-              <GitHub sx={{ mr: 0.5 }} />
-              GitHub
-            </Link>
-            <Link
-              href="https://linkedin.com/in/antoncodes"
-              color="inherit"
-              sx={{ display: 'flex', alignItems: 'center' }}
-            >
-              <LinkedIn sx={{ mr: 0.5 }} />
-              LinkedIn
-            </Link>
-          </Box>
+          <CoreSocialLinks />
         </Container>
       </Box>
     </Box>

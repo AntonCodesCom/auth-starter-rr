@@ -3,7 +3,7 @@ import { GitHub, LinkedIn } from '@mui/icons-material';
 
 export default function CoreSocialLinks() {
   return (
-    <Stack direction="row" gap={2} color="text.secondary">
+    <Stack display="inline-flex" direction="row" gap={2} color="text.secondary">
       <Link
         variant="body2"
         href="https://github.com/AntonCodesCom"
