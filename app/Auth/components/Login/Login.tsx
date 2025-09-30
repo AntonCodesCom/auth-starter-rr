@@ -86,7 +86,7 @@ export default function AuthLogin() {
           </Typography>
 
           <Box
-            method="post"
+            // method="post"
             ref={formRef}
             aria-labelledby="authLoginH1"
             component="form"

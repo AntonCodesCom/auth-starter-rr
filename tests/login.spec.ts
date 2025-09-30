@@ -44,7 +44,7 @@ async function fillAndSubmitLoginForm(
  */
 test('happy path', async ({ page }) => {
   // start
-  await page.goto('/login', { waitUntil });
+  await page.goto('/login');
   // login form fill & submit
   await fillAndSubmitLoginForm(page, e2eUsername, e2ePassword);
   await expect(page).toHaveURL('/restricted');
