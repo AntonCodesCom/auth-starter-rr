@@ -7,6 +7,16 @@ import {
   Paper,
 } from '@mui/material';
 import CoreSocialLinks from '~/Core/components/SocialLinks';
+import type { Route } from './+types/login';
+import { getAccessTokenFromRequest } from '~/sessions/auth';
+import { redirect } from 'react-router';
+
+// export async function loader({ request }: Route.LoaderArgs) {
+//   const accessToken = await getAccessTokenFromRequest(request);
+//   if (accessToken) {
+//     return redirect('/')
+//   }
+// }
 
 export default function RouteLogin() {
   return (
