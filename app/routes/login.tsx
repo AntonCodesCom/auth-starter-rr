@@ -57,7 +57,7 @@ export default function RouteLogin() {
             Sign In
           </Typography>
 
-          <Box component="form" sx={{ width: '100%' }}>
+          <Box component="form" aria-label="Login" sx={{ width: '100%' }}>
             <TextField
               margin="normal"
               required
@@ -84,7 +84,7 @@ export default function RouteLogin() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Log In
             </Button>
           </Box>
         </Paper>
