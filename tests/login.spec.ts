@@ -4,6 +4,7 @@ import e2eLogInProgrammatically, {
   e2eSetAccessTokenIntoSessionCookie,
 } from './utils/logInProgrammatically';
 import { envE2E } from '~/env';
+import makeAuthSessionUtils from '~/sessions/auth';
 
 // env e2e
 const { e2ePassword, e2eUsername } = envE2E();
@@ -13,6 +14,9 @@ const waitUntil = 'domcontentloaded';
 
 /**
  * e2e
+ *
+ * this test duplicates the index route e2e test to some degree
+ * TODO: find a way to assert redirection to "/"
  */
 test('existing valid access token', async ({ page, context }) => {
   // log in programmatically
@@ -28,6 +32,9 @@ test('existing valid access token', async ({ page, context }) => {
 
 /**
  * e2e
+ *
+ * this test duplicates the index route e2e test to some degree
+ * TODO: find a way to assert redirection to "/"
  */
 test('existing invalid access token', async ({ page, context }) => {
   // simulate an access token in cookies
@@ -39,4 +46,9 @@ test('existing invalid access token', async ({ page, context }) => {
   // start
   await page.goto('/login', { waitUntil });
   await expect(page).toHaveURL('/login');
+  // assert session cookie absence
+  const cookies = await context.cookies();
+  const cookieNames = cookies.map((x) => x.name);
+  const { authSessionName } = makeAuthSessionUtils();
+  expect(cookieNames).not.toContain(authSessionName);
 });
