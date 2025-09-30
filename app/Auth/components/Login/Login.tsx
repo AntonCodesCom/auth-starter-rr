@@ -39,11 +39,20 @@ export default function AuthLogin() {
             }}
           />
 
-          <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
-            Sign In
+          <Typography
+            id="authLoginH1"
+            component="h1"
+            variant="h5"
+            sx={{ mb: 3 }}
+          >
+            Login
           </Typography>
 
-          <Box component="form" sx={{ width: '100%' }}>
+          <Box
+            aria-labelledby="authLoginH1"
+            component="form"
+            sx={{ width: '100%' }}
+          >
             <TextField
               margin="normal"
               required
@@ -70,7 +79,7 @@ export default function AuthLogin() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Log In
             </Button>
           </Box>
         </Paper>
