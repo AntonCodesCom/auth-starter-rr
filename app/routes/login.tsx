@@ -84,22 +84,32 @@ export default function RouteLogin() {
         >
           © {new Date().getFullYear()} Anton Bahurinsky
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 1 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 2,
+            mt: 1,
+            color: 'text.secondary',
+          }}
+        >
           <Link
+            variant="body2"
             href="https://github.com/AntonCodesCom"
             color="inherit"
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <GitHub sx={{ mr: 0.5 }} />
-            GitHub
+            <GitHub fontSize="small" sx={{ mr: 0.5, mb: 0.5 }} />
+            <span>GitHub</span>
           </Link>
           <Link
+            variant="body2"
             href="https://linkedin.com/in/antoncodes"
             color="inherit"
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <LinkedIn sx={{ mr: 0.5 }} />
-            LinkedIn
+            <LinkedIn fontSize="small" sx={{ mr: 0.5, mb: 0.5 }} />
+            <span>LinkedIn</span>
           </Link>
         </Box>
       </Box>
