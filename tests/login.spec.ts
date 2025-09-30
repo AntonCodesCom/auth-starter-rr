@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import test, { expect } from '@playwright/test';
+import test, { expect, type Page } from '@playwright/test';
 import e2eLogInProgrammatically, {
   e2eSetAccessTokenIntoSessionCookie,
 } from './utils/logInProgrammatically';
@@ -14,12 +14,11 @@ const { e2ePassword, e2eUsername } = envE2E();
 const waitUntil = 'domcontentloaded';
 const exact = true;
 
-/**
- * e2e
- */
-test('happy path', async ({ page }) => {
-  // start
-  await page.goto('/login', { waitUntil });
+async function fillAndSubmitLoginForm(
+  page: Page,
+  username: string,
+  password: string,
+) {
   // "incorrect credentials" alert
   const alert = page.getByRole('alert', {
     name: authLoginIncorrectCredentialsLabel,
@@ -31,20 +30,44 @@ test('happy path', async ({ page }) => {
   await expect(form).toBeVisible();
   const usernameInput = form.getByRole('textbox', { name: 'Username', exact });
   await expect(usernameInput).toBeVisible();
-  await usernameInput.fill(e2eUsername);
+  await usernameInput.fill(username);
   const passwordInput = form.getByRole('textbox', { name: 'Password', exact });
   await expect(passwordInput).toBeVisible();
-  await passwordInput.fill(e2ePassword);
+  await passwordInput.fill(password);
   const submitButton = page.getByRole('button', { name: 'Log In', exact });
   await expect(submitButton).toBeVisible();
   await submitButton.click();
+}
+
+/**
+ * e2e
+ */
+test('happy path', async ({ page }) => {
+  // start
+  await page.goto('/login', { waitUntil });
+  // login form fill & submit
+  await fillAndSubmitLoginForm(page, e2eUsername, e2ePassword);
   await expect(page).toHaveURL('/restricted');
 });
 
 /**
  * e2e
  */
-test.skip('incorrect credentials', async ({ page }) => {});
+test('incorrect credentials', async ({ page }) => {
+  // data
+  const incorrectUsername = `incorrectUsername${faker.string.alphanumeric(5)}`;
+  const incorrectPassword = `IncorrectPassword1#${faker.string.sample()}`;
+  // start
+  await page.goto('/login', { waitUntil });
+  // login form fill & submit
+  await fillAndSubmitLoginForm(page, incorrectUsername, incorrectPassword);
+  // "incorrect credentials" alert
+  const alert = page.getByRole('alert', {
+    name: authLoginIncorrectCredentialsLabel,
+    exact,
+  });
+  await expect(alert).toBeVisible();
+});
 
 /**
  * e2e
