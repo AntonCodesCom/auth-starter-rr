@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { cleanup, render, screen, within } from '@testing-library/react';
 import { createRoutesStub } from 'react-router';
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import AuthLogin from './Login';
+import AuthLogin, { authLoginIncorrectCredentialsLabel } from './Login';
 import userEvent from '@testing-library/user-event';
 
 describe('AuthLogin', () => {
@@ -13,7 +13,7 @@ describe('AuthLogin', () => {
   /**
    * component test
    */
-  test('happy path', async () => {
+  test('form & alert', async () => {
     // mock data
     const mockUsername = faker.internet.username();
     const mockPassword = faker.internet.password();
@@ -31,11 +31,18 @@ describe('AuthLogin', () => {
           const username = String(formData.get('username'));
           const password = String(formData.get('password'));
           spy(username, password);
+          return { incorrectCredentialsNonce: Date.now() };
         },
       },
     ]);
     render(<RoutesStub />);
     const user = userEvent.setup();
+
+    // alert (absence)
+    const alert0 = screen.queryByRole('alert', {
+      name: authLoginIncorrectCredentialsLabel,
+    });
+    expect(alert0).toBeNull();
 
     // form
     const form = screen.getByRole('form', { name: 'Login' });
@@ -64,10 +71,11 @@ describe('AuthLogin', () => {
     });
 
     // asserting loading off
-    await vi.waitFor(() => {
-      expect(usernameInput.disabled).toBe(false);
-      expect(passwordInput.disabled).toBe(false);
-      expect(submitButton.disabled).toBe(false);
-    });
+    expect(usernameInput.disabled).toBe(false);
+    expect(passwordInput.disabled).toBe(false);
+    expect(submitButton.disabled).toBe(false);
+
+    // alert
+    screen.getByRole('alert', { name: authLoginIncorrectCredentialsLabel });
   });
 });

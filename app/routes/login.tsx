@@ -21,7 +21,8 @@ export async function action({ request }: Route.ActionArgs) {
   const password = String(formData.get('password'));
   const { accessToken } = await authLoginRequest({ username, password });
   if (!accessToken) {
-    return {}; // TODO: invalid credentials
+    // triggering the "incorrect credentials" alert
+    return { incorrectCredentialsNonce: Date.now() };
   }
   const { getAuthSession, commitAuthSession, authSessionName } =
     makeAuthSessionUtils();

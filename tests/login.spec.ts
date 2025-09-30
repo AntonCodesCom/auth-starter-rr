@@ -58,7 +58,7 @@ test('incorrect credentials', async ({ page }) => {
   const incorrectUsername = `incorrectUsername${faker.string.alphanumeric(5)}`;
   const incorrectPassword = `IncorrectPassword1#${faker.string.sample()}`;
   // start
-  await page.goto('/login', { waitUntil });
+  await page.goto('/login');
   // login form fill & submit
   await fillAndSubmitLoginForm(page, incorrectUsername, incorrectPassword);
   // "incorrect credentials" alert

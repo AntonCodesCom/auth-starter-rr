@@ -12,15 +12,19 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useFetcher } from 'react-router';
 import CoreFooter from '~/Core/components/Footer';
 
+// label
 export const authLoginIncorrectCredentialsLabel =
   'Incorrect username or password.';
 
+/**
+ * component
+ */
 export default function AuthLogin() {
   const fetcher = useFetcher();
   const formRef = useRef<HTMLFormElement>(null);
   const isLoading = fetcher.state !== 'idle';
 
-  // snackbar
+  // "incorrect credentials" alert snackbar
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   function openSnackbar() {
     setSnackbarOpen(true);
@@ -28,10 +32,10 @@ export default function AuthLogin() {
   function closeSnackbar() {
     setSnackbarOpen(false);
   }
-
-  // useEffect(() => {
-  //   console.log(fetcher.data)
-  // })
+  const incorrectCredentialsNonce = fetcher.data?.incorrectCredentialsNonce;
+  useEffect(() => {
+    incorrectCredentialsNonce && openSnackbar();
+  }, [incorrectCredentialsNonce]);
 
   async function handleSubmitSuccess(e: FormEvent) {
     e.preventDefault();
