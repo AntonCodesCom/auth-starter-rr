@@ -13,7 +13,8 @@ export async function loader({ request }: Route.LoaderArgs) {
   return { message: data.message };
 }
 
-export default function RouteRestricted() {
+export default function RouteRestricted({ loaderData }: Route.ComponentProps) {
+  const { message } = loaderData;
   return (
     <Container component="main" sx={{ mt: 4, mb: 4, flexGrow: 1 }}>
       <Typography variant="h4" component="h1" gutterBottom>
@@ -28,15 +29,7 @@ export default function RouteRestricted() {
           component="pre"
           sx={{ color: 'common.white', fontFamily: 'monospace' }}
         >
-          {`// Example authentication code
-const login = async (credentials) => {
-  const response = await fetch('/api/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(credentials),
-  });
-  return response.json();
-};`}
+          {message}
         </Typography>
       </Paper>
     </Container>
