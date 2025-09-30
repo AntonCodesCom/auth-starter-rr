@@ -6,9 +6,24 @@ import {
   Typography,
   Paper,
 } from '@mui/material';
+import { useRef, type FormEvent } from 'react';
+import { useFetcher } from 'react-router';
 import CoreSocialLinks from '~/Core/components/SocialLinks';
 
 export default function AuthLogin() {
+  const fetcher = useFetcher();
+  const formRef = useRef<HTMLFormElement>(null);
+  const isLoading = fetcher.state !== 'idle';
+
+  async function handleSubmitSuccess(e: FormEvent) {
+    e.preventDefault();
+    if (isLoading) {
+      // additional guard
+      return;
+    }
+    fetcher.submit(formRef.current, { method: 'post' });
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -49,9 +64,11 @@ export default function AuthLogin() {
           </Typography>
 
           <Box
+            ref={formRef}
             aria-labelledby="authLoginH1"
             component="form"
             sx={{ width: '100%' }}
+            onSubmit={handleSubmitSuccess}
           >
             <TextField
               margin="normal"
@@ -62,6 +79,7 @@ export default function AuthLogin() {
               name="username"
               autoComplete="username"
               autoFocus
+              disabled={isLoading}
             />
             <TextField
               margin="normal"
@@ -72,12 +90,14 @@ export default function AuthLogin() {
               type="password"
               id="password"
               autoComplete="current-password"
+              disabled={isLoading}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
             >
               Log In
             </Button>

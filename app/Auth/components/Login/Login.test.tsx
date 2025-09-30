@@ -52,5 +52,22 @@ describe('AuthLogin', () => {
       name: 'Log In',
     });
     await user.click(submitButton);
+
+    // asserting loading state
+    expect(usernameInput.disabled).toBe(true);
+    expect(passwordInput.disabled).toBe(true);
+    expect(submitButton.disabled).toBe(true);
+
+    // waiting for the form submission results from the `action`
+    await vi.waitFor(() => {
+      expect(spy).toHaveBeenCalledWith(mockUsername, mockPassword);
+    });
+
+    // asserting loading off
+    await vi.waitFor(() => {
+      expect(usernameInput.disabled).toBe(false);
+      expect(passwordInput.disabled).toBe(false);
+      expect(submitButton.disabled).toBe(false);
+    });
   });
 });
