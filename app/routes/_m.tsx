@@ -9,7 +9,7 @@ import {
 import { Link, Outlet } from 'react-router';
 import type { Route } from './+types/_m';
 import { UnauthorizedException } from '~/Auth/exceptions';
-import CoreSocialLinks from '~/Core/components/SocialLinks';
+import CoreFooter from '~/Core/components/Footer';
 
 export default function RouteLayoutMain() {
   return (
@@ -42,17 +42,7 @@ export default function RouteLayoutMain() {
         sx={{ py: 3, px: 2, mt: 'auto', bgcolor: 'grey.100' }}
       >
         <Container maxWidth="sm">
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            align="center"
-            mb={1}
-          >
-            {'Copyright © '}
-            {new Date().getFullYear()}
-            {' Anton Bahurinsky'}
-          </Typography>
-          <CoreSocialLinks />
+          <CoreFooter />
         </Container>
       </Box>
     </Box>

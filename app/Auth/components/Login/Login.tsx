@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useRef, type FormEvent } from 'react';
 import { useFetcher } from 'react-router';
-import CoreSocialLinks from '~/Core/components/SocialLinks';
+import CoreFooter from '~/Core/components/Footer';
 
 export default function AuthLogin() {
   const fetcher = useFetcher();
@@ -105,15 +105,8 @@ export default function AuthLogin() {
           </Box>
         </Paper>
 
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          align="center"
-          sx={{ mt: 4, mb: 1 }}
-        >
-          © {new Date().getFullYear()} Anton Bahurinsky
-        </Typography>
-        <CoreSocialLinks />
+        <Box mb={4} />
+        <CoreFooter />
       </Box>
     </Container>
   );
