@@ -5,15 +5,33 @@ import {
   TextField,
   Typography,
   Paper,
+  Snackbar,
+  Alert,
 } from '@mui/material';
-import { useRef, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useFetcher } from 'react-router';
 import CoreFooter from '~/Core/components/Footer';
+
+export const authLoginIncorrectCredentialsLabel =
+  'Incorrect username or password.';
 
 export default function AuthLogin() {
   const fetcher = useFetcher();
   const formRef = useRef<HTMLFormElement>(null);
   const isLoading = fetcher.state !== 'idle';
+
+  // snackbar
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  function openSnackbar() {
+    setSnackbarOpen(true);
+  }
+  function closeSnackbar() {
+    setSnackbarOpen(false);
+  }
+
+  // useEffect(() => {
+  //   console.log(fetcher.data)
+  // })
 
   async function handleSubmitSuccess(e: FormEvent) {
     e.preventDefault();
@@ -79,7 +97,7 @@ export default function AuthLogin() {
               label="Username"
               name="username"
               autoComplete="username"
-              autoFocus
+              // autoFocus
               disabled={isLoading}
             />
             <TextField
@@ -108,6 +126,24 @@ export default function AuthLogin() {
         <Box mb={4} />
         <CoreFooter />
       </Box>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={closeSnackbar}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <Alert
+          onClose={closeSnackbar}
+          severity="error"
+          variant="filled"
+          sx={{ width: '100%' }}
+          aria-labelledby="authLoginIncorrectCredentialsAlertLabel"
+        >
+          <span id="authLoginIncorrectCredentialsAlertLabel">
+            {authLoginIncorrectCredentialsLabel}
+          </span>
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }

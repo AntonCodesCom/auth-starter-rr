@@ -5,6 +5,7 @@ import e2eLogInProgrammatically, {
 } from './utils/logInProgrammatically';
 import { envE2E } from '~/env';
 import makeAuthSessionUtils from '~/sessions/auth';
+import { authLoginIncorrectCredentialsLabel } from '~/Auth/components/Login/Login';
 
 // env e2e
 const { e2ePassword, e2eUsername } = envE2E();
@@ -19,6 +20,12 @@ const exact = true;
 test('happy path', async ({ page }) => {
   // start
   await page.goto('/login', { waitUntil });
+  // "incorrect credentials" alert
+  const alert = page.getByRole('alert', {
+    name: authLoginIncorrectCredentialsLabel,
+    exact,
+  });
+  await expect(alert).toBeHidden(); // absence
   // login form
   const form = page.getByRole('form', { name: 'Login', exact });
   await expect(form).toBeVisible();
@@ -37,7 +44,7 @@ test('happy path', async ({ page }) => {
 /**
  * e2e
  */
-test.skip('invalid credentials', async ({ page }) => {});
+test.skip('incorrect credentials', async ({ page }) => {});
 
 /**
  * e2e
