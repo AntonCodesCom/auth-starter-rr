@@ -49,7 +49,7 @@ export default function RouteLayoutMain() {
             sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 1 }}
           >
             <Link
-              href="https://github.com"
+              href="https://github.com/AntonCodesCom"
               color="inherit"
               sx={{ display: 'flex', alignItems: 'center' }}
             >
@@ -57,7 +57,7 @@ export default function RouteLayoutMain() {
               GitHub
             </Link>
             <Link
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/antoncodes"
               color="inherit"
               sx={{ display: 'flex', alignItems: 'center' }}
             >

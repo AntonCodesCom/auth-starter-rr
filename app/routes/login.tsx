@@ -5,7 +5,9 @@ import {
   TextField,
   Typography,
   Paper,
+  Link,
 } from '@mui/material';
+import { GitHub, LinkedIn } from '@mui/icons-material';
 
 export default function RouteLogin() {
   return (
@@ -82,6 +84,24 @@ export default function RouteLogin() {
         >
           © {new Date().getFullYear()} Anton Bahurinsky
         </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 1 }}>
+          <Link
+            href="https://github.com/AntonCodesCom"
+            color="inherit"
+            sx={{ display: 'flex', alignItems: 'center' }}
+          >
+            <GitHub sx={{ mr: 0.5 }} />
+            GitHub
+          </Link>
+          <Link
+            href="https://linkedin.com/in/antoncodes"
+            color="inherit"
+            sx={{ display: 'flex', alignItems: 'center' }}
+          >
+            <LinkedIn sx={{ mr: 0.5 }} />
+            LinkedIn
+          </Link>
+        </Box>
       </Box>
     </Container>
   );
