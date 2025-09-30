@@ -11,13 +11,17 @@ import type { Route } from './+types/login';
 import { getAccessTokenFromRequest } from '~/sessions/auth';
 import { redirect } from 'react-router';
 
-// export async function loader({ request }: Route.LoaderArgs) {
-//   const accessToken = await getAccessTokenFromRequest(request);
-//   if (accessToken) {
-//     return redirect('/')
-//   }
-// }
+// loader
+export async function loader({ request }: Route.LoaderArgs) {
+  const accessToken = await getAccessTokenFromRequest(request);
+  if (accessToken) {
+    return redirect('/');
+  }
+}
 
+/**
+ * route component
+ */
 export default function RouteLogin() {
   return (
     <Container component="main" maxWidth="xs">

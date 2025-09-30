@@ -1,9 +1,30 @@
 import { faker } from '@faker-js/faker';
 import test, { expect } from '@playwright/test';
-import { e2eSetAccessTokenIntoSessionCookie } from './utils/logInProgrammatically';
+import e2eLogInProgrammatically, {
+  e2eSetAccessTokenIntoSessionCookie,
+} from './utils/logInProgrammatically';
+import { envE2E } from '~/env';
+
+// env e2e
+const { e2ePassword, e2eUsername } = envE2E();
 
 // local config
 const waitUntil = 'domcontentloaded';
+
+/**
+ * e2e
+ */
+test('existing valid access token', async ({ page, context }) => {
+  // log in programmatically
+  await e2eLogInProgrammatically({
+    context,
+    username: e2eUsername,
+    password: e2ePassword,
+  });
+  // start
+  await page.goto('/login', { waitUntil });
+  await expect(page).toHaveURL('/restricted');
+});
 
 /**
  * e2e
