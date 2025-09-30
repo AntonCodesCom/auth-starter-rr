@@ -11,6 +11,33 @@ const { e2ePassword, e2eUsername } = envE2E();
 
 // local config
 const waitUntil = 'domcontentloaded';
+const exact = true;
+
+/**
+ * e2e
+ */
+test('happy path', async ({ page }) => {
+  // start
+  await page.goto('/login', { waitUntil });
+  // login form
+  const form = page.getByRole('form', { name: 'Login', exact });
+  await expect(form).toBeVisible();
+  // const usernameInput = form.getByRole('textbox', { name: 'Username', exact });
+  // await expect(usernameInput).toBeVisible();
+  // await usernameInput.fill(e2eUsername);
+  // const passwordInput = form.getByRole('textbox', { name: 'Password', exact });
+  // await expect(passwordInput).toBeVisible();
+  // await passwordInput.fill(e2ePassword);
+  // const submitButton = page.getByRole('button', { name: 'Log In', exact });
+  // await expect(submitButton).toBeVisible();
+  // await submitButton.click();
+  // await expect(page).toHaveURL('/restricted');
+});
+
+/**
+ * e2e
+ */
+test.skip('invalid credentials', async ({ page }) => {});
 
 /**
  * e2e
