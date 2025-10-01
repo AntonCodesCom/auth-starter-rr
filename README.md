@@ -1,87 +1,53 @@
-# Welcome to React Router!
+# Auth Starter RR
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A starting app for auth-protected solutions.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+This is the client-side application built with React Router 7.
 
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+The server-side application is available in [this repository](https://github.com/AntonCodesCom/auth-starter-nestjs).
 
 ## Getting Started
 
-### Installation
+1.  [Set up](https://github.com/AntonCodesCom/auth-starter-nestjs?tab=readme-ov-file#getting-started) the server-side application.
+2.  Clone this repository and change to the project directory in your terminal.
+3.  Update the `name`, `version` and `license` fields in the `package.json`.
+4.  Install dependencies:
 
-Install the dependencies:
+        npm install
 
-```bash
-npm install
-```
+5.  Configure environment variables, see `.env.example` file for instructions.
+6.  Start the application in development watch mode:
 
-### Development
+        npm run dev
 
-Start the development server with HMR:
+The application should now be running on http://localhost:5173 by default.
 
-```bash
-npm run dev
-```
+### Unit tests
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
+Running unit tests (in the watch mode):
 
 ```bash
-npm run build
+npm test
 ```
 
-## Deployment
+### End-to-end tests
 
-### Docker Deployment
-
-To build and run using Docker:
+Running end-to-end (E2E) tests in the watch mode:
 
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+npm run e2e
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+## Updating project dependencies
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+1. Update the outdated dependencies:
 
-### DIY Deployment
+   npm update --save
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+2. Run unit and E2E tests to make sure nothing is broken.
 
-Make sure to deploy the output of `npm run build`
+## Author
 
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
+Anton "AntonCodes" Bahurinsky
 
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+[antoncodes.com](https://antoncodes.com)
