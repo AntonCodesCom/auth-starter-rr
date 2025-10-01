@@ -6,9 +6,13 @@ import e2eLogInProgrammatically, {
 import { envE2E } from '~/env';
 import makeAuthSessionUtils from '~/sessions/auth';
 import { authLoginIncorrectCredentialsLabel } from '~/Auth/components/Login/Login';
+import e2eConfig from './config';
 
 // env e2e
 const { e2ePassword, e2eUsername } = envE2E();
+
+// e2e config
+const { defaultRestrictedRoutePathname } = e2eConfig;
 
 // local config
 const waitUntil = 'domcontentloaded';
@@ -47,7 +51,7 @@ test('happy path', async ({ page }) => {
   await page.goto('/login');
   // login form fill & submit
   await fillAndSubmitLoginForm(page, e2eUsername, e2ePassword);
-  await expect(page).toHaveURL('/restricted');
+  await expect(page).toHaveURL(defaultRestrictedRoutePathname);
 });
 
 /**
@@ -84,7 +88,7 @@ test('existing valid access token', async ({ page, context }) => {
   });
   // start
   await page.goto('/login', { waitUntil });
-  await expect(page).toHaveURL('/restricted');
+  await expect(page).toHaveURL(defaultRestrictedRoutePathname);
 });
 
 /**

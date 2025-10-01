@@ -5,9 +5,13 @@ import e2eLogInProgrammatically, {
 import { envE2E } from '~/env';
 import { faker } from '@faker-js/faker';
 import makeAuthSessionUtils from '~/sessions/auth';
+import e2eConfig from './config';
 
 // env e2e
 const { e2ePassword, e2eUsername } = envE2E();
+
+// e2e config
+const { defaultRestrictedRoutePathname } = e2eConfig;
 
 // local config
 const waitUntil = 'domcontentloaded';
@@ -24,7 +28,7 @@ test('authenticated', async ({ page, context }) => {
   });
   // start
   await page.goto('/', { waitUntil });
-  await expect(page).toHaveURL('/restricted');
+  await expect(page).toHaveURL(defaultRestrictedRoutePathname);
 });
 
 /**
