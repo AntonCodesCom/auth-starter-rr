@@ -40,11 +40,11 @@ npm run e2e
 
 ## Updating project dependencies
 
-1. Update the outdated dependencies:
+1.  Update the outdated dependencies:
 
-   npm update --save
+        npm update --save
 
-2. Run unit and E2E tests to make sure nothing is broken.
+2.  Run unit and E2E tests to make sure nothing is broken.
 
 ## Author
 
