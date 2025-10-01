@@ -1,5 +1,13 @@
+import appConfig from '~/config';
+
+// app config
+const { defaultRestrictedRoutePathname } = appConfig;
+
+/**
+ * E2E config
+ */
 const e2eConfig = {
-  defaultRestrictedRoutePathname: '/restricted',
+  defaultRestrictedRoutePathname,
   defaultRestrictedRouteLabel: 'Restricted Route',
 };
 

@@ -5,7 +5,12 @@ import makeAuthSessionUtils, {
 } from '~/sessions/auth';
 import authFetch from '~/Auth/utils/fetch';
 import { UnauthorizedException } from '~/Auth/exceptions';
+import appConfig from '~/config';
 
+// app config
+const { defaultRestrictedRoutePathname } = appConfig;
+
+// loader
 export async function loader({ request }: Route.LoaderArgs) {
   const accessToken = await getAccessTokenFromRequest(request);
   if (!accessToken) {
@@ -17,7 +22,7 @@ export async function loader({ request }: Route.LoaderArgs) {
       pathname: '/auth/verify',
       method: 'post',
     });
-    return redirect('/restricted');
+    return redirect(defaultRestrictedRoutePathname);
   } catch (err) {
     if (err instanceof UnauthorizedException) {
       const { getAuthSession, destroyAuthSession } = makeAuthSessionUtils();

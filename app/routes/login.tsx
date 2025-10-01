@@ -5,6 +5,10 @@ import makeAuthSessionUtils, {
 import { redirect } from 'react-router';
 import AuthLogin from '~/Auth/components/Login';
 import authLoginRequest from '~/Auth/requests/login';
+import appConfig from '~/config';
+
+// app config
+const { defaultRestrictedRoutePathname } = appConfig;
 
 // loader
 export async function loader({ request }: Route.LoaderArgs) {
@@ -29,7 +33,7 @@ export async function action({ request }: Route.ActionArgs) {
   const cookieHeader = request.headers.get('Cookie');
   const session = await getAuthSession(cookieHeader);
   session.set(authSessionName, accessToken);
-  return redirect('/restricted', {
+  return redirect(defaultRestrictedRoutePathname, {
     headers: {
       'Set-Cookie': await commitAuthSession(session),
     },
