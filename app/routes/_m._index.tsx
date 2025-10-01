@@ -4,7 +4,6 @@ import makeAuthSessionUtils, {
   getAccessTokenFromRequest,
 } from '~/sessions/auth';
 import authFetch from '~/Auth/utils/fetch';
-import { UnauthorizedException } from '~/Auth/exceptions';
 import appConfig from '~/config';
 
 // app config
@@ -24,7 +23,9 @@ export async function loader({ request }: Route.LoaderArgs) {
     });
     return redirect(defaultRestrictedRoutePathname);
   } catch (err) {
-    if (err instanceof UnauthorizedException) {
+    // `isRouteErrorResponse(err)` doesn't work here
+    // TODO: compare `err` instance to something different than `Response` ?
+    if (err instanceof Response && err.status === 401) {
       const { getAuthSession, destroyAuthSession } = makeAuthSessionUtils();
       const cookieHeader = request.headers.get('Cookie');
       const session = await getAuthSession(cookieHeader);

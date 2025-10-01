@@ -1,13 +1,17 @@
 import coreFetch from '~/Core/utils/fetch';
 import { type HTMLFormMethod } from 'react-router';
-import { HttpException, UnauthorizedException } from '../exceptions';
 
+// params
 interface Params {
   accessToken: string;
   pathname: string;
   method: HTMLFormMethod;
 }
 
+/**
+ *
+ * @throws {Response} on 4xx or 5xx backend HTTP response
+ */
 export default async function authFetch<T = any>({
   accessToken,
   pathname,
@@ -20,10 +24,7 @@ export default async function authFetch<T = any>({
     },
   });
   if (!res.ok) {
-    if (res.status === 401) {
-      throw new UnauthorizedException();
-    }
-    throw new HttpException(`Status code: ${res.status}`);
+    throw new Response(res.statusText, { status: res.status });
   }
   if (res.status === 204) {
     return undefined as T;

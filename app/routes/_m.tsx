@@ -7,8 +7,6 @@ import {
   Typography,
 } from '@mui/material';
 import { Link, Outlet } from 'react-router';
-import type { Route } from './+types/_m';
-import { UnauthorizedException } from '~/Auth/exceptions';
 import CoreFooter from '~/Core/components/Footer';
 
 export default function RouteLayoutMain() {
@@ -47,11 +45,4 @@ export default function RouteLayoutMain() {
       </Box>
     </Box>
   );
-}
-
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  if (error instanceof UnauthorizedException) {
-    throw new Response('Unauthorized', { status: 401 });
-  }
-  throw error;
 }
