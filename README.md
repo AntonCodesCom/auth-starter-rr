@@ -32,11 +32,10 @@ npm test
 
 ### End-to-end tests
 
-Running end-to-end (E2E) tests in the watch mode:
+1.  Make sure you have E2E-related environment variables set (see `.env.example`)
+2.  Run end-to-end (E2E) tests in the watch mode:
 
-```bash
-npm run e2e
-```
+        npm run e2e
 
 ## Updating project dependencies
 
