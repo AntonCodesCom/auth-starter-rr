@@ -1,6 +1,3 @@
-// import envdef from './envdef/envdef';
-// import type { EnvDefItem } from './envdef/types';
-
 import { type EnvDefItem, envdef } from 'envdef';
 
 /**
