@@ -8,7 +8,7 @@ import makeAuthSessionUtils from '~/sessions/auth';
 import e2eConfig from './config';
 
 // env e2e
-const { e2ePassword, e2eUsername } = envE2E();
+const { E2E_PASSWORD: e2ePassword, E2E_USERNAME: e2eUsername } = envE2E();
 
 // e2e config
 const { defaultRestrictedRoutePathname } = e2eConfig;

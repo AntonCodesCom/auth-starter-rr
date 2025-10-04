@@ -11,7 +11,6 @@ export function mode() {
 }
 
 const defs = [
-  // TODO: to e2e
   {
     name: 'API_URL',
     default: 'http://localhost:3000',
@@ -50,7 +49,7 @@ export function envE2E() {
   const { BASE_URL, E2E_USERNAME, E2E_PASSWORD } = envdef(e2eDefs);
   return {
     BASE_URL,
-    e2eUsername: E2E_USERNAME,
-    e2ePassword: E2E_PASSWORD,
+    E2E_USERNAME,
+    E2E_PASSWORD,
   };
 }
