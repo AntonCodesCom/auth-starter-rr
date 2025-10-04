@@ -12,14 +12,17 @@ import type { Route } from './+types/root';
 import './app.css';
 import { Button, Container, Typography } from '@mui/material';
 import type { ReactNode } from 'react';
+import appConfig from './config';
 
+// app config
+const { appName } = appConfig;
+
+// meta
 export function meta({}: Route.MetaArgs) {
-  return [
-    { title: 'Auth Starter' },
-    { name: 'description', content: 'Auth Starter' },
-  ];
+  return [{ title: appName }, { name: 'description', content: appName }];
 }
 
+// links
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {
@@ -33,6 +36,7 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+// layout
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -51,10 +55,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * app
+ */
 export default function App() {
   return <Outlet />;
 }
 
+// error boundary
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = 'Oops!';
   let details = 'An unexpected error occurred.';

@@ -1,4 +1,5 @@
 const appConfig = {
+  appName: 'Auth Starter',
   defaultRestrictedRoutePathname: '/restricted',
 };
 

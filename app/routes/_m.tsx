@@ -7,8 +7,15 @@ import {
   Typography,
 } from '@mui/material';
 import { Link, Outlet } from 'react-router';
+import appConfig from '~/config';
 import CoreFooter from '~/Core/components/Footer';
 
+// app config
+const { appName } = appConfig;
+
+/**
+ * route layout component
+ */
 export default function RouteLayoutMain() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -17,11 +24,11 @@ export default function RouteLayoutMain() {
           <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
             <img
               src="/logo.svg"
-              alt="Auth Starter Logo"
+              alt={appName}
               style={{ marginRight: '1rem', height: 32 }}
             />
             <Typography variant="h6" component="div">
-              Auth Starter
+              {appName}
             </Typography>
           </Box>
           <Button component={Link} to="/logout" color="inherit">
