@@ -10,8 +10,8 @@
     "typecheck": "react-router typegen && tsc",
     "prepare": "husky install",
     "test": "vitest",
-    "e2e:ci": "NODE_ENV=testing playwright test",
-    "e2e": "NODE_ENV=testing playwright test --ui"
+    "e2e:ci": "NODE_ENV=test playwright test",
+    "e2e": "NODE_ENV=test playwright test --ui"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
