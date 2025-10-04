@@ -1,5 +1,7 @@
-import envdef from './envdef/envdef';
-import type { EnvDefItem } from './envdef/types';
+// import envdef from './envdef/envdef';
+// import type { EnvDefItem } from './envdef/types';
+
+import { type EnvDefItem, envdef } from 'envdef';
 
 /**
  * @see https://github.com/AntonCodesCom/simple-todo-remix/blob/main/app/env.ts
@@ -11,7 +13,8 @@ export function mode() {
   };
 }
 
-const defs: EnvDefItem[] = [
+const defs = [
+  // TODO: to e2e
   {
     name: 'BASE_URL',
     default: 'http://localhost:5173',
@@ -24,7 +27,7 @@ const defs: EnvDefItem[] = [
     name: 'SESSION_COOKIE_SECRET',
     nonProdDefault: '__INSECURE__session_cookie_secret_dev',
   },
-];
+] as const satisfies EnvDefItem[];
 
 /**
  * @see https://github.com/AntonCodesCom/simple-todo-remix/blob/main/app/env.ts
@@ -38,14 +41,14 @@ export default function env() {
   };
 }
 
-const e2eDefs: EnvDefItem[] = [
+const e2eDefs = [
   {
     name: 'E2E_USERNAME',
   },
   {
     name: 'E2E_PASSWORD',
   },
-];
+] as const satisfies EnvDefItem[];
 
 export function envE2E() {
   const { E2E_USERNAME, E2E_PASSWORD } = envdef(e2eDefs);
