@@ -10,7 +10,7 @@ export function mode() {
   };
 }
 
-const defs = [
+const appDefs = [
   {
     name: 'API_URL',
     default: 'http://localhost:3000',
@@ -25,10 +25,10 @@ const defs = [
  * @see https://github.com/AntonCodesCom/simple-todo-remix/blob/main/app/env.ts
  */
 export default function env() {
-  const { API_URL, SESSION_COOKIE_SECRET } = envdef(defs);
+  const { API_URL, SESSION_COOKIE_SECRET } = envdef(appDefs);
   return {
-    apiUrl: API_URL,
-    sessionCookieSecret: SESSION_COOKIE_SECRET,
+    API_URL,
+    SESSION_COOKIE_SECRET,
   };
 }
 

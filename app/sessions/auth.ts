@@ -18,7 +18,7 @@ export async function getAccessTokenFromRequest(
  * @see https://github.com/AntonCodesCom/simple-todo-remix/blob/main/app/sessions.ts
  */
 export default function makeAuthSessionUtils() {
-  const { sessionCookieSecret } = env();
+  const { SESSION_COOKIE_SECRET } = env();
   const authSessionName = 'session';
   const { getSession, commitSession, destroySession } =
     createCookieSessionStorage({
@@ -28,7 +28,7 @@ export default function makeAuthSessionUtils() {
         path: '/',
         // sameSite: isDev ? 'strict' : 'lax', // TODO: env var
         sameSite: 'lax',
-        secrets: [sessionCookieSecret],
+        secrets: [SESSION_COOKIE_SECRET],
         // secure: isProd || !allowSessionCookieWithoutHttps,
         secure: true,
         maxAge: 60 * 60 * 12, // 12 hours
